@@ -50,7 +50,7 @@ CREATE TABLE audit.logged_actions (
     row_data hstore,
     changed_fields hstore,
     statement_only boolean NOT NULL,
-    CONSTRAINT logged_actions_action_check ); -- CHECK ((action = ANY (ARRAY['I'::text, 'D'::text, 'U'::text, 'T'::text])))
+    CONSTRAINT logged_actions_action_check); -- CHECK ((action = ANY (ARRAY['I'::text, 'D'::text, 'U'::text, 'T'::text])))
 -- );
 
 
@@ -793,7 +793,7 @@ CREATE VIEW public.nevse1 AS
 CREATE TABLE public.new_evses (
     nevse_id integer NOT NULL,
     analysis_id integer NOT NULL,
-    input_evse_id integer NOT NULL,
+    input_evse_id integer, --Remove NOT NULL
     trip_count integer,
     od_pairs text,
     latitude double NOT NULL,
