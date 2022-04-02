@@ -1,4 +1,11 @@
-ALTER TABLE ONLY analysis_record ALTER COLUMN set_id SET DEFAULT currval('analysis_sets_set_id_seq');
+CREATE OR REPLACE FUNCTION take_last3() RETURNS bigint LANGUAGE SQL AS
+$$ SELECT last_value FROM analysis_sets_set_id_seq $$;
+-- add last_value function for default definition
+
+ALTER TABLE ONLY analysis_record ALTER COLUMN set_id SET DEFAULT take_last3();
+
+
+--currval('analysis_sets_set_id_seq');
 
 -- CREATE TABLE analysis_sets_record_xref (
 --     set_id integer NOT NULL, 
